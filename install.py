@@ -68,19 +68,26 @@ def install_dependencies():
     """Instalar dependencias."""
     print("\n📚 Instalando dependencias...")
 
-    # Lista de dependencias
+    # Lista de dependencias actualizada según requirements.txt
     dependencies = [
-        "langchain",
-        "langchain-community",
-        "langchain-ollama",
-        "pymongo",
-        "pyside6",
-        "python-dotenv",
-        "sentence-transformers",
-        "torch",
-        "numpy",
-        "pydantic",
-        "requests"
+        "langchain>=0.1.0",
+        "langchain-community>=0.0.10",
+        "langchain-ollama>=0.0.1",
+        "pymongo>=4.6.0",
+        "bson>=0.5.10",
+        "qdrant-client>=1.7.0",
+        "PySide6>=6.6.0",
+        "python-dotenv>=1.0.0",
+        "requests>=2.31.0",
+        "pydantic>=2.5.0",
+        "sentence-transformers>=2.2.0",
+        "transformers>=4.21.0",
+        "torch>=2.0.0",
+        "numpy>=1.24.0",
+        "Pillow>=9.0.0",
+        "timm>=0.9.0",
+        "piexif>=1.3.1",
+        "tqdm>=4.64.0"
     ]
 
     # Instalar dependencias
@@ -212,7 +219,7 @@ fi
 
 # Verificar dependencias
 echo "📦 Verificando dependencias..."
-python -c "import pymongo, langchain, PySide6; print('✅ Todas las dependencias están disponibles')"
+python -c "import pymongo, langchain, PySide6, qdrant_client, transformers, PIL, timm; print('✅ Todas las dependencias están disponibles')"
 
 if [ $? -ne 0 ]; then
     echo "❌ Faltan dependencias. Ejecute install.py primero."
