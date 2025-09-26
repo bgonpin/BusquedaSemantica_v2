@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Empleo - Búsqueda Semántica V2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            margin: -20px -20px 40px -20px;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            border-left: 5px solid #3498db;
+        }
+
+        .toc h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 25px 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .subsection {
+            margin: 30px 0;
+        }
+
+        .subsection h3 {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .subsection h4 {
+            color: #34495e;
+            font-size: 1.1em;
+            margin: 20px 0 10px 0;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-inline {
+            background: #ecf0f1;
+            color: #2c3e50;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight-box {
+            background: #e8f5e8;
+            border: 1px solid #27ae60;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            border: 1px solid #3498db;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            background: #3498db;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .requirement-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .requirement-item strong {
+            color: #2c3e50;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: #2c3e50;
+            color: white;
+            margin: 40px -20px -20px -20px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .footer p {
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .section-content {
+                padding: 20px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📋 MANUAL DE EMPLEO</h1>
+            <div class="subtitle">BÚSQUEDA SEMÁNTICA V2</div>
+            <p>Sistema Avanzado de Búsqueda Semántica con IA para Imágenes y Documentos</p>
+        </header>
+
+        <div class="toc">
+            <h2>📖 ÍNDICE</h2>
+            <ul>
+                <li><a href="#introduccion">🚀 INTRODUCCIÓN</a></li>
+                <li><a href="#caracteristicas">✨ CARACTERÍSTICAS PRINCIPALES</a></li>
+                <li><a href="#requisitos">🛠️ REQUISITOS DEL SISTEMA</a></li>
+                <li><a href="#instalacion">⚙️ INSTALACIÓN Y CONFIGURACIÓN</a></li>
+                <li><a href="#interfaz">🖥️ INTERFAZ DE USUARIO</a></li>
+                <li><a href="#funcionalidades">🔍 FUNCIONALIDADES DETALLADAS</a></li>
+                <li><a href="#procesos">🔧 PROCESOS DE BÚSQUEDA</a></li>
+                <li><a href="#procesamiento">📸 PROCESAMIENTO DE IMÁGENES</a></li>
+                <li><a href="#bases-datos">💾 GESTIÓN DE BASES DE DATOS</a></li>
+                <li><a href="#configuracion">⚙️ CONFIGURACIÓN AVANZADA</a></li>
+                <li><a href="#solucion">🐛 SOLUCIÓN DE PROBLEMAS</a></li>
+                <li><a href="#mantenimiento">🔧 MANTENIMIENTO Y BACKUP</a></li>
+                <li><a href="#comandos">💻 COMANDOS DE LÍNEA</a></li>
+                <li><a href="#capturas">📸 CAPTURAS DE PANTALLA</a></li>
+            </ul>
+        </div>
+
+        <section class="section" id="introduccion">
+            <div class="section-header">🚀 INTRODUCCIÓN</div>
+            <div class="section-content">
+                <p><strong>Búsqueda Semántica V2</strong> es un sistema avanzado de búsqueda inteligente que combina múltiples tecnologías de IA para proporcionar una experiencia de búsqueda semántica superior en imágenes y documentos. El sistema utiliza modelos de lenguaje de última generación, bases de datos vectoriales y procesamiento de imágenes para ofrecer resultados de búsqueda altamente relevantes y contextuales.</p>
+
+                <h3>¿Qué hace este sistema?</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🔍 Búsqueda Semántica Inteligente</h4>
+                        <p>Comprende el contexto y significado de las consultas, no solo palabras clave</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🖼️ Análisis Automático de Imágenes</h4>
+                        <p>Detecta objetos, personas y características en las imágenes</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔍 Búsqueda Híbrida</h4>
+                        <p>Combina búsqueda de texto tradicional con similitud semántica</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🖥️ Interfaz Gráfica Moderna</h4>
+                        <p>Aplicación de escritorio intuitiva con PySide6</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>⚡ Procesamiento por Lotes</h4>
+                        <p>Manejo eficiente de grandes volúmenes de datos</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>💾 Bases de Datos Híbridas</h4>
+                        <p>MongoDB para almacenamiento + Qdrant para búsquedas vectoriales</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="caracteristicas">
+            <div class="section-header">✨ CARACTERÍSTICAS PRINCIPALES</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>🔍 Búsqueda Inteligente</h3>
+                    <ul>
+                        <li><strong>Búsqueda semántica</strong> con embeddings vectoriales usando Ollama</li>
+                        <li><strong>Búsqueda híbrida</strong> combinando texto y similitud semántica</li>
+                        <li><strong>Búsqueda por similitud</strong> con cálculo de similitud coseno</li>
+                        <li><strong>Sugerencias automáticas</strong> basadas en contenido existente</li>
+                        <li><strong>Filtros avanzados</strong> por ubicación, objetos, fechas, etc.</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>🖼️ Procesamiento de Imágenes</h3>
+                    <ul>
+                        <li><strong>Detección automática de objetos</strong> en imágenes usando modelos de IA</li>
+                        <li><strong>Extracción de metadatos</strong> (EXIF, ubicación, fecha, dimensiones)</li>
+                        <li><strong>Análisis de contenido</strong> con IA para generar descripciones automáticas</li>
+                        <li><strong>Procesamiento por lotes</strong> para grandes volúmenes de datos</li>
+                        <li><strong>Soporte para múltiples formatos</strong> (JPG, PNG, GIF, BMP, TIFF)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>💾 Bases de Datos Híbridas</h3>
+                    <ul>
+                        <li><strong>MongoDB</strong> para almacenamiento principal de documentos</li>
+                        <li><strong>Qdrant</strong> para búsquedas vectoriales optimizadas</li>
+                        <li><strong>Sincronización automática</strong> entre ambas bases de datos</li>
+                        <li><strong>Escalabilidad</strong> para millones de documentos</li>
+                        <li><strong>Backup y restauración</strong> integrados</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>🖥️ Interfaz Gráfica</h3>
+                    <ul>
+                        <li><strong>Aplicación de escritorio</strong> moderna con PySide6</li>
+                        <li><strong>Interfaz intuitiva</strong> con pestañas organizadas</li>
+                        <li><strong>Monitoreo en tiempo real</strong> del procesamiento</li>
+                        <li><strong>Estadísticas detalladas</strong> del sistema</li>
+                        <li><strong>Previsualización de imágenes</strong> con información detallada</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="requisitos">
+            <div class="section-header">🛠️ REQUISITOS DEL SISTEMA</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Software Requerido</h3>
+                    <div class="requirements-grid">
+                        <div class="requirement-item">
+                            <strong>Python 3.8+</strong><br>
+                            <small>(recomendado Python 3.11)</small>
+                        </div>
+                        <div class="requirement-item">
+                            <strong>MongoDB 4.4+</strong><br>
+                            <small>Base de datos principal</small>
+                        </div>
+                        <div class="requirement-item">
+                            <strong>Qdrant 1.0+</strong><br>
+                            <small>Base de datos vectorial</small>
+                        </div>
+                        <div class="requirement-item">
+                            <strong>Ollama</strong><br>
+                            <small>Con modelos instalados</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Modelos de IA Requeridos</h3>
+                    <div class="code-block">
+# Instalar modelos necesarios en Ollama<br>
+ollama pull qwen3:14b_40K      # Modelo de lenguaje principal<br>
+ollama pull embeddinggemma     # Modelo de embeddings
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Hardware Recomendado</h3>
+                    <div class="requirements-grid">
+                        <div class="requirement-item">
+                            <strong>CPU</strong><br>
+                            Multi-core (4+ núcleos)
+                        </div>
+                        <div class="requirement-item">
+                            <strong>RAM</strong><br>
+                            8GB mínimo, 16GB recomendado
+                        </div>
+                        <div class="requirement-item">
+                            <strong>GPU</strong><br>
+                            Opcional (para aceleración)
+                        </div>
+                        <div class="requirement-item">
+                            <strong>Espacio</strong><br>
+                            10GB+ para modelos y datos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="instalacion">
+            <div class="section-header">⚙️ INSTALACIÓN Y CONFIGURACIÓN</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>1. Instalación Automática con Conda</h3>
+
+                    <h4>En Linux/Mac:</h4>
+                    <div class="code-block">./setup_conda_linux.sh</div>
+
+                    <h4>En Windows:</h4>
+                    <div class="code-block">setup_conda_windows.bat</div>
+
+                    <div class="info-box">
+                        <strong>¿Qué hace el script de instalación?</strong>
+                        <ol>
+                            <li>Verifica que Conda esté instalado</li>
+                            <li>Crea entorno virtual <code>busqueda_semantica_v2</code></li>
+                            <li>Instala Python 3.11</li>
+                            <li>Instala todas las dependencias necesarias</li>
+                            <li>Verifica la instalación</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>2. Activación del Entorno</h3>
+
+                    <h4>Linux/Mac:</h4>
+                    <div class="code-block">conda activate busqueda_semantica_v2</div>
+
+                    <h4>Windows:</h4>
+                    <div class="code-block">conda activate busqueda_semantica_v2</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>3. Configuración de Variables de Entorno</h3>
+                    <div class="code-block">
+# MongoDB<br>
+MONGODB_URI=mongodb://localhost:27017/<br>
+MONGODB_DATABASE=album<br>
+MONGODB_COLLECTION=imagenes_2<br>
+<br>
+# Qdrant<br>
+QDRANT_URL=http://localhost:6333<br>
+QDRANT_API_KEY=<br>
+QDRANT_COLLECTION=imagenes_semanticas<br>
+<br>
+# Ollama<br>
+OLLAMA_BASE_URL=http://localhost:11434<br>
+OLLAMA_MODEL=qwen3:14b_40K<br>
+EMBEDDING_MODEL=embeddinggemma<br>
+<br>
+# Aplicación<br>
+LOG_LEVEL=INFO<br>
+BATCH_SIZE=50<br>
+MAX_WORKERS=4<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>4. Inicio de Servicios</h3>
+
+                    <h4>MongoDB:</h4>
+                    <div class="code-block">sudo systemctl start mongod</div>
+
+                    <h4>Qdrant:</h4>
+                    <div class="code-block">docker run -p 6333:6333 qdrant/qdrant</div>
+
+                    <h4>Ollama:</h4>
+                    <div class="code-block">ollama serve</div>
+                </div>
+
+                <div class="subsection">
+                    <h3>5. Ejecución de la Aplicación</h3>
+                    <div class="code-block">python main.py</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="interfaz">
+            <div class="section-header">🖥️ INTERFAZ DE USUARIO</div>
+            <div class="section-content">
+                <p>La aplicación cuenta con una interfaz gráfica moderna organizada en pestañas:</p>
+
+                <div class="subsection">
+                    <h3>Pestaña 1: Búsqueda</h3>
+                    <p><strong>Ubicación:</strong> Primera pestaña de la aplicación</p>
+
+                    <h4>Elementos principales:</h4>
+                    <ul>
+                        <li><strong>Campo de consulta:</strong> Ingrese su búsqueda de forma natural</li>
+                        <li><strong>Tipo de búsqueda:</strong> Seleccione entre Híbrida, Texto o Semántica</li>
+                        <li><strong>Límite de resultados:</strong> Número máximo de resultados (1-100)</li>
+                        <li><strong>Umbral de similitud:</strong> Sensibilidad de la búsqueda (0.0-1.0)</li>
+                    </ul>
+
+                    <h4>Funcionalidades:</h4>
+                    <ul>
+                        <li>Búsqueda en tiempo real con autocompletado</li>
+                        <li>Resultados ordenados por relevancia</li>
+                        <li>Previsualización de imágenes con información detallada</li>
+                        <li>Filtros por ubicación, objetos detectados, fechas</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pestaña 2: Estadísticas</h3>
+                    <p><strong>Ubicación:</strong> Segunda pestaña</p>
+
+                    <h4>Información mostrada:</h4>
+                    <ul>
+                        <li>Total de documentos en la base de datos</li>
+                        <li>Documentos procesados con embeddings</li>
+                        <li>Tasa de procesamiento completado</li>
+                        <li>Estado del sistema en tiempo real</li>
+                    </ul>
+
+                    <h4>Acciones disponibles:</h4>
+                    <ul>
+                        <li>Actualizar estadísticas manualmente</li>
+                        <li>Procesar documentos pendientes</li>
+                        <li>Ver logs de procesamiento</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pestaña 3: Configuración</h3>
+                    <p><strong>Ubicación:</strong> Tercera pestaña</p>
+
+                    <h4>Configuraciones disponibles:</h4>
+                    <ul>
+                        <li><strong>MongoDB:</strong> URI, base de datos, colección</li>
+                        <li><strong>Ollama:</strong> URL del servidor, modelo de lenguaje</li>
+                        <li><strong>Qdrant:</strong> URL del servidor, colección vectorial</li>
+                    </ul>
+
+                    <h4>Acciones:</h4>
+                    <ul>
+                        <li>Guardar configuración</li>
+                        <li>Probar conexiones a todos los servicios</li>
+                        <li>Validar configuración actual</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pestaña 4: Procesar Colección</h3>
+                    <p><strong>Ubicación:</strong> Cuarta pestaña</p>
+
+                    <h4>Funcionalidad principal:</h4>
+                    <ul>
+                        <li>Procesamiento masivo de toda la colección</li>
+                        <li>Generación de embeddings para documentos sin procesar</li>
+                        <li>Actualización de descripciones semánticas</li>
+                    </ul>
+
+                    <h4>Configuración:</h4>
+                    <ul>
+                        <li>Tamaño del lote de procesamiento (10-200)</li>
+                        <li>Máximo de documentos a procesar</li>
+                        <li>Monitoreo en tiempo real del progreso</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pestaña 5: Detección de Objetos</h3>
+                    <p><strong>Ubicación:</strong> Quinta pestaña</p>
+
+                    <h4>Sistema de detección:</h4>
+                    <ul>
+                        <li>Análisis automático de objetos en imágenes</li>
+                        <li>Detección de personas y elementos</li>
+                        <li>Procesamiento manual controlado por el usuario</li>
+                    </ul>
+
+                    <h4>Estado del sistema:</h4>
+                    <ul>
+                        <li>Número de imágenes pendientes</li>
+                        <li>Estado del procesamiento</li>
+                        <li>Logs de detección en tiempo real</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pestaña 6: Backup/Restore</h3>
+                    <p><strong>Ubicación:</strong> Sexta pestaña</p>
+
+                    <h4>Funcionalidades:</h4>
+                    <ul>
+                        <li>Backup completo de MongoDB y Qdrant</li>
+                        <li>Restauración desde archivos de backup</li>
+                        <li>Validación de integridad de backups</li>
+                        <li>Configuración de rutas de almacenamiento</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3>Pestaña 7: Buscar Imágenes</h3>
+                    <p><strong>Ubicación:</strong> Séptima pestaña</p>
+
+                    <h4>Búsqueda de archivos:</h4>
+                    <ul>
+                        <li>Exploración de directorios en busca de imágenes</li>
+                        <li>Búsqueda recursiva en subdirectorios</li>
+                        <li>Detección automática de imágenes nuevas</li>
+                        <li>Procesamiento e inserción en la base de datos</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="funcionalidades">
+            <div class="section-header">🔍 FUNCIONALIDADES DETALLADAS</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Sistema de Búsqueda Semántica</h3>
+
+                    <h4>Tipos de Búsqueda Disponibles:</h4>
+
+                    <div class="feature-card">
+                        <h4>1. Búsqueda Híbrida (Recomendada)</h4>
+                        <ul>
+                            <li>Combina búsqueda de texto y similitud semántica</li>
+                            <li>Utiliza embeddings vectoriales para encontrar resultados conceptualmente similares</li>
+                            <li>Proporciona los resultados más relevantes y contextuales</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>2. Búsqueda de Texto</h4>
+                        <ul>
+                            <li>Búsqueda tradicional por palabras clave</li>
+                            <li>Utiliza índices de texto optimizados</li>
+                            <li>Rápida pero menos contextual</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>3. Búsqueda Semántica Pura</h4>
+                        <ul>
+                            <li>Basada exclusivamente en similitud vectorial</li>
+                            <li>Encuentra imágenes conceptualmente similares</li>
+                            <li>Ideal para consultas abstractas o creativas</li>
+                        </ul>
+                    </div>
+
+                    <h4>Cómo Funciona la Búsqueda:</h4>
+
+                    <div class="steps-list">
+                        <li><strong>Procesamiento de la Consulta:</strong> La consulta del usuario se convierte en un vector de embedding</li>
+                        <li><strong>Comparación Vectorial:</strong> Se comparan con los embeddings de todas las imágenes</li>
+                        <li><strong>Cálculo de Similitud:</strong> Se calcula la similitud coseno entre vectores</li>
+                        <li><strong>Ordenamiento:</strong> Los resultados se ordenan por similitud descendente</li>
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>Fórmula de Similitud:</strong><br>
+                        <code>similitud = (A • B) / (|A| × |B|)</code><br>
+                        Donde A y B son vectores de embedding<br>
+                        Resultado entre 0.0 (nada similar) y 1.0 (idéntico)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Procesamiento de Imágenes</h3>
+
+                    <h4>Extracción de Metadatos:</h4>
+
+                    <div class="feature-card">
+                        <h4>Información EXIF:</h4>
+                        <ul>
+                            <li>Fecha y hora de creación</li>
+                            <li>Dimensiones de la imagen</li>
+                            <li>Configuración de cámara</li>
+                            <li>Coordenadas GPS (si disponibles)</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <h4>Metadatos calculados:</h4>
+                        <ul>
+                            <li>Hash SHA512 para identificación única</li>
+                            <li>Tamaño del archivo en bytes</li>
+                            <li>Dimensiones en píxeles</li>
+                            <li>Formato de imagen</li>
+                        </ul>
+                    </div>
+
+                    <h4>Detección de Objetos:</h4>
+
+                    <div class="feature-card">
+                        <h4>Modelos utilizados:</h4>
+                        <ul>
+                            <li>Modelos pre-entrenados de visión por computadora</li>
+                            <li>Detección de objetos comunes (personas, animales, vehículos)</li>
+                            <li>Reconocimiento de escenas y contextos</li>
+                        </ul>
+                    </div>
+
+                    <div class="steps-list">
+                        <li><strong>Carga y preprocesamiento:</strong> de la imagen</li>
+                        <li><strong>Aplicación del modelo:</strong> de detección</li>
+                        <li><strong>Extracción de objetos:</strong> con confianza > 70%</li>
+                        <li><strong>Almacenamiento:</strong> de resultados en la base de datos</li>
+                    </div>
+
+                    <h4>Generación de Descripciones:</h4>
+
+                    <div class="steps-list">
+                        <li><strong>Análisis:</strong> de objetos detectados</li>
+                        <li><strong>Extracción:</strong> de metadatos disponibles</li>
+                        <li><strong>Generación:</strong> de descripción natural con IA</li>
+                        <li><strong>Creación:</strong> de embedding semántico</li>
+                        <li><strong>Almacenamiento:</strong> en Qdrant para búsquedas</li>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Gestión de Bases de Datos</h3>
+
+                    <h4>MongoDB (Almacenamiento Principal):</h4>
+
+                    <div class="feature-card">
+                        <h4>Estructura de documentos:</h4>
+                        <div class="code-block">
+{
+  "_id": "hash_sha512",
+  "id_hash": "identificador_corto",
+  "nombre": "nombre_archivo.jpg",
+  "ruta": "/ruta/completa/a/imagen.jpg",
+  "ancho": 1920,
+  "alto": 1080,
+  "peso": 2048576,
+  "fecha_creacion": "2024-01-15T10:30:00",
+  "coordenadas": {"lat": 40.7128, "lon": -74.0060},
+  "ciudad": "Nueva York",
+  "barrio": "Manhattan",
+  "objetos": ["persona", "edificio", "calle"],
+  "personas": ["Juan", "María"],
+  "embedding": [0.123, 0.456, ...],
+  "descripcion_semantica": "Descripción generada por IA",
+  "objeto_procesado": true
+}
+                        </div>
+                    </div>
+
+                    <h4>Qdrant (Búsquedas Vectoriales):</h4>
+
+                    <div class="highlight-box">
+                        <strong>Ventajas de Qdrant:</strong>
+                        <ul>
+                            <li>Búsquedas vectoriales ultra-rápidas</li>
+                            <li>Indexación HNSW para eficiencia</li>
+                            <li>Soporte para filtros complejos</li>
+                            <li>Escalabilidad horizontal</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Configuración recomendada:</strong>
+                        <ul>
+                            <li>Distancia: Coseno</li>
+                            <li>Dimensiones del vector: 384 (embeddinggemma)</li>
+                            <li>Parámetros HNSW: m=16, ef_construction=200</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="procesos">
+            <div class="section-header">🔧 PROCESOS DE BÚSQUEDA</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Búsqueda Básica</h3>
+
+                    <div class="steps-list">
+                        <li><strong>Abrir la aplicación:</strong> <code>python main.py</code></li>
+                        <li><strong>Ir a la pestaña "Búsqueda"</strong></li>
+                        <li><strong>Escribir consulta:</strong> Ejemplo "perros jugando en el parque"</li>
+                        <li><strong>Seleccionar tipo:</strong> "Híbrida" (recomendado)</li>
+                        <li><strong>Configurar límite:</strong> 10-20 resultados</li>
+                        <li><strong>Ajustar umbral:</strong> 0.7 (70% similitud mínima)</li>
+                        <li><strong>Hacer clic en "Buscar"</strong></li>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Búsqueda Avanzada con Filtros</h3>
+
+                    <h4>Filtros disponibles:</h4>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <h4>📍 Ubicación</h4>
+                            <p>Ciudad, barrio, calle, país</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>🔍 Objetos</h4>
+                            <p>Elementos específicos detectados</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>👥 Personas</h4>
+                            <p>Personas identificadas en las imágenes</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>📅 Fechas</h4>
+                            <p>Rango de fechas de creación</p>
+                        </div>
+                        <div class="feature-card">
+                            <h4>📐 Dimensiones</h4>
+                            <p>Tamaño de las imágenes</p>
+                        </div>
+                    </div>
+
+                    <h4>Ejemplo de búsqueda filtrada:</h4>
+                    <div class="steps-list">
+                        <li><strong>Consulta:</strong> "paisaje"</li>
+                        <li><strong>Filtros:</strong> Ciudad="Madrid", Objetos=["montaña", "lago"]</li>
+                        <li><strong>Resultado:</strong> Imágenes de paisajes con montañas y lagos en Madrid</li>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Búsqueda por Similitud Visual</h3>
+
+                    <div class="steps-list">
+                        <li><strong>Seleccionar una imagen</strong> de los resultados</li>
+                        <li><strong>Hacer clic derecho</strong> o usar botón "Buscar similares"</li>
+                        <li><strong>El sistema encuentra</strong> imágenes visualmente similares</li>
+                        <li><strong>Ordenadas por similitud</strong> visual y semántica</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="procesamiento">
+            <div class="section-header">📸 PROCESAMIENTO DE IMÁGENES</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Procesamiento Individual</h3>
+
+                    <div class="steps-list">
+                        <li><strong>Ir a "Buscar Imágenes"</strong></li>
+                        <li><strong>Seleccionar directorio</strong> con imágenes</li>
+                        <li><strong>Configurar opciones:</strong>
+                            <ul>
+                                <li>Búsqueda recursiva: ✓</li>
+                                <li>Solo imágenes nuevas: ✓</li>
+                            </ul>
+                        </li>
+                        <li><strong>Hacer clic en "Buscar Imágenes"</strong></li>
+                        <li><strong>Revisar resultados</strong> encontrados</li>
+                        <li><strong>Procesar imágenes</strong> seleccionadas</li>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Procesamiento por Lotes</h3>
+
+                    <div class="steps-list">
+                        <li><strong>Ir a "Procesar Colección"</strong></li>
+                        <li><strong>Configurar parámetros:</strong>
+                            <ul>
+                                <li>Tamaño del lote: 50</li>
+                                <li>Máximo documentos: 1000</li>
+                            </ul>
+                        </li>
+                        <li><strong>Hacer clic en "Procesar Colección Completa"</strong></li>
+                        <li><strong>Monitorear progreso</strong> en tiempo real</li>
+                        <li><strong>Ver estadísticas</strong> de procesamiento</li>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Procesamiento Manual de Objetos</h3>
+
+                    <div class="steps-list">
+                        <li><strong>Ir a "Detección de Objetos"</strong></li>
+                        <li><strong>Ver estado</strong> del sistema</li>
+                        <li><strong>Hacer clic en "Procesar Ahora"</strong></li>
+                        <li><strong>Monitorear detección</strong> en el log</li>
+                        <li><strong>Verificar resultados</strong> en la base de datos</li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="bases-datos">
+            <div class="section-header">💾 GESTIÓN DE BASES DE DATOS</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Backup y Restauración</h3>
+
+                    <h4>Crear Backup:</h4>
+                    <div class="steps-list">
+                        <li><strong>Ir a "Backup/Restore"</strong></li>
+                        <li><strong>Seleccionar tipo:</strong> MongoDB o Qdrant</li>
+                        <li><strong>Elegir ruta</strong> del archivo de backup</li>
+                        <li><strong>Hacer clic en "Crear Backup"</strong></li>
+                        <li><strong>Esperar</strong> a que termine el proceso</li>
+                        <li><strong>Verificar</strong> archivo creado</li>
+                    </div>
+
+                    <h4>Restaurar Backup:</h4>
+                    <div class="steps-list">
+                        <li><strong>Seleccionar archivo</strong> de backup existente</li>
+                        <li><strong>Configurar opciones:</strong>
+                            <ul>
+                                <li>Recrear colección: ✓ (recomendado)</li>
+                                <li>Eliminar existente: ✓</li>
+                            </ul>
+                        </li>
+                        <li><strong>Confirmar</strong> restauración</li>
+                        <li><strong>Esperar</strong> a que termine</li>
+                        <li><strong>Verificar</strong> datos restaurados</li>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Mantenimiento de Índices</h3>
+
+                    <div class="info-box">
+                        <strong>Índices automáticos:</strong>
+                        <ul>
+                            <li>Índice de texto para búsquedas</li>
+                            <li>Índice único por hash SHA512</li>
+                            <li>Índices compuestos para consultas frecuentes</li>
+                        </ul>
+                    </div>
+
+                    <h4>Optimización manual:</h4>
+                    <div class="code-block">
+# Recrear índices de texto<br>
+db.imagenes_2.dropIndexes()<br>
+db.imagenes_2.createIndex({<br>
+ nombre: "text",<br>
+ descripcion_semantica: "text",<br>
+ objetos: "text",<br>
+ ciudad: "text"<br>
+})
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Limpieza de Datos</h3>
+
+                    <h4>Eliminar duplicados:</h4>
+                    <div class="code-block">
+# Script para eliminar duplicados por hash<br>
+from src.database import DatabaseManager<br>
+db = DatabaseManager()<br>
+db.collection.delete_many({"hash_sha512": {"$in": duplicados}})
+                    </div>
+
+                    <h4>Limpiar documentos incompletos:</h4>
+                    <div class="code-block">
+# Eliminar documentos sin información básica<br>
+db.collection.delete_many({<br>
+ "$or": [<br>
+   {"nombre": {"$exists": False}},<br>
+   {"ruta": {"$exists": False}},<br>
+   {"ancho": {"$exists": False}}<br>
+ ]<br>
+})
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="configuracion">
+            <div class="section-header">⚙️ CONFIGURACIÓN AVANZADA</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Variables de Entorno Avanzadas</h3>
+                    <div class="code-block">
+# Configuración de logging<br>
+LOG_LEVEL=DEBUG<br>
+LOG_FILE=busqueda_semantica.log<br>
+<br>
+# Configuración de procesamiento<br>
+BATCH_SIZE=100<br>
+MAX_WORKERS=8<br>
+TIMEOUT_REQUESTS=30<br>
+<br>
+# Configuración de modelos<br>
+OLLAMA_TIMEOUT=60<br>
+EMBEDDING_DIMENSIONS=384<br>
+SIMILARITY_THRESHOLD=0.7<br>
+<br>
+# Configuración de memoria<br>
+MAX_MEMORY_USAGE=0.8<br>
+GARBAGE_COLLECTION_INTERVAL=100<br>
+<br>
+# Configuración de cache<br>
+CACHE_EMBEDDINGS=True<br>
+CACHE_SIZE=1000<br>
+CACHE_TTL=3600<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Configuración de Modelos</h3>
+
+                    <h4>Modelos alternativos de Ollama:</h4>
+                    <div class="code-block">
+# Modelos de lenguaje<br>
+ollama pull llama2:13b<br>
+ollama pull codellama:13b<br>
+<br>
+# Modelos de embeddings<br>
+ollama pull all-minilm-l6-v2<br>
+ollama pull mxbai-embed-large<br>
+                    </div>
+
+                    <h4>Configuración de parámetros:</h4>
+                    <div class="code-block">
+# En el código de inicialización<br>
+model_kwargs = {<br>
+   "temperature": 0.1,<br>
+   "top_p": 0.9,<br>
+   "max_tokens": 512,<br>
+   "repeat_penalty": 1.1<br>
+}
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Configuración de Qdrant</h3>
+
+                    <h4>Optimización de rendimiento:</h4>
+                    <div class="code-block">
+# Configuración recomendada<br>
+collection_config = {<br>
+   "vectors": {<br>
+       "size": 384,<br>
+       "distance": "Cosine"<br>
+   },<br>
+   "optimizers": {<br>
+       "deleted_threshold": 0.2,<br>
+       "vacuum_min_vector_number": 1000<br>
+   },<br>
+   "hnsw_config": {<br>
+       "m": 16,<br>
+       "ef_construct": 200,<br>
+       "full_scan_threshold": 10000<br>
+   }<br>
+}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="solucion">
+            <div class="section-header">🐛 SOLUCIÓN DE PROBLEMAS</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Problemas Comunes</h3>
+
+                    <div class="warning-box">
+                        <h4>1. Error de Conexión a MongoDB</h4>
+                        <p><strong>Síntoma:</strong> "Error al conectar a MongoDB"</p>
+                        <p><strong>Causa:</strong> MongoDB no está ejecutándose</p>
+                        <p><strong>Solución:</strong></p>
+                        <div class="code-block">
+# Verificar estado<br>
+sudo systemctl status mongod<br>
+<br>
+# Iniciar servicio<br>
+sudo systemctl start mongod<br>
+<br>
+# Verificar conexión<br>
+mongosh --eval "db.adminCommand('ping')"<br>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>2. Error de Conexión a Qdrant</h4>
+                        <p><strong>Síntoma:</strong> "Error al conectar a Qdrant"</p>
+                        <p><strong>Causa:</strong> Qdrant no está ejecutándose</p>
+                        <p><strong>Solución:</strong></p>
+                        <div class="code-block">
+# Verificar contenedor Docker<br>
+docker ps | grep qdrant<br>
+<br>
+# Reiniciar Qdrant<br>
+docker restart qdrant<br>
+<br>
+# Verificar API<br>
+curl http://localhost:6333/health<br>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>3. Error de Modelos de Ollama</h4>
+                        <p><strong>Síntoma:</strong> "Error al inicializar modelos"</p>
+                        <p><strong>Causa:</strong> Modelos no instalados o Ollama no ejecutándose</p>
+                        <p><strong>Solución:</strong></p>
+                        <div class="code-block">
+# Verificar Ollama<br>
+ollama list<br>
+<br>
+# Instalar modelos requeridos<br>
+ollama pull qwen3:14b_40K<br>
+ollama pull embeddinggemma<br>
+<br>
+# Reiniciar Ollama<br>
+ollama serve<br>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>4. Error de Memoria Insuficiente</h4>
+                        <p><strong>Síntoma:</strong> "Out of memory" o aplicación se cierra</p>
+                        <p><strong>Causa:</strong> Procesamiento de lotes muy grandes</p>
+                        <p><strong>Solución:</strong></p>
+                        <div class="code-block">
+# Reducir tamaño de lote<br>
+BATCH_SIZE=10 python main.py<br>
+<br>
+# Procesar en lotes más pequeños<br>
+python procesar_coleccion.py --max-docs 100<br>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>5. Búsquedas Lentas</h4>
+                        <p><strong>Síntoma:</strong> Resultados tardan mucho tiempo</p>
+                        <p><strong>Causa:</strong> Falta de índices o configuración inadecuada</p>
+                        <p><strong>Solución:</strong></p>
+                        <div class="code-block">
+# Recrear índices de texto<br>
+python setup_text_indexes.py<br>
+<br>
+# Optimizar configuración Qdrant<br>
+# Revisar parámetros HNSW<br>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Logs y Debug</h3>
+
+                    <div class="info-box">
+                        <strong>Ubicación de logs:</strong>
+                        <ul>
+                            <li>Archivo: <code>busqueda_semantica.log</code></li>
+                            <li>Nivel: Configurable en variables de entorno</li>
+                        </ul>
+                    </div>
+
+                    <h4>Modo debug:</h4>
+                    <div class="code-block">LOG_LEVEL=DEBUG python main.py<br></div>
+
+                    <h4>Logs detallados:</h4>
+                    <div class="code-block">
+# Ver logs en tiempo real<br>
+tail -f busqueda_semantica.log<br>
+<br>
+# Buscar errores específicos<br>
+grep "ERROR" busqueda_semantica.log<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Recuperación de Datos</h3>
+
+                    <div class="steps-list">
+                        <li><strong>Si se corrompe la base de datos:</strong>
+                            <ol>
+                                <li>Detener la aplicación</li>
+                                <li>Restaurar desde backup más reciente</li>
+                                <li>Recrear índices si es necesario</li>
+                                <li>Reiniciar aplicación</li>
+                            </ol>
+                        </li>
+                        <li><strong>Si se pierden embeddings:</strong>
+                            <ol>
+                                <li>Ir a "Procesar Colección"</li>
+                                <li>Procesar documentos sin embedding</li>
+                                <li>Verificar que Qdrant se actualice correctamente</li>
+                            </ol>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="mantenimiento">
+            <div class="section-header">🔧 MANTENIMIENTO Y BACKUP</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Backup Regular</h3>
+
+                    <div class="info-box">
+                        <strong>Frecuencia recomendada:</strong>
+                        <ul>
+                            <li>Backup completo: Semanal</li>
+                            <li>Backup incremental: Diario</li>
+                            <li>Backup antes de cambios importantes: Siempre</li>
+                        </ul>
+                    </div>
+
+                    <h4>Estrategia de backup:</h4>
+                    <div class="code-block">
+# Backup diario automático<br>
+0 2 * * * /ruta/al/proyecto/backup_daily.sh<br>
+<br>
+# Backup semanal completo<br>
+0 3 * * 1 /ruta/al/proyecto/backup_weekly.sh<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Monitoreo del Sistema</h3>
+
+                    <div class="info-box">
+                        <strong>Métricas importantes:</strong>
+                        <ul>
+                            <li>Espacio en disco utilizado</li>
+                            <li>Número de documentos procesados</li>
+                            <li>Tasa de éxito de búsquedas</li>
+                            <li>Tiempo de respuesta promedio</li>
+                        </ul>
+                    </div>
+
+                    <h4>Comandos de monitoreo:</h4>
+                    <div class="code-block">
+# Estado del sistema<br>
+python status.py<br>
+<br>
+# Verificar integridad<br>
+python check_imports.py<br>
+<br>
+# Estadísticas detalladas<br>
+python -c "from src.database import DatabaseManager; db = DatabaseManager(); print(db.obtener_estadisticas())"<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Limpieza Periódica</h3>
+
+                    <h4>Eliminar datos antiguos:</h4>
+                    <div class="code-block">
+# Eliminar documentos con errores<br>
+db.collection.delete_many({"error": {"$exists": True}})<br>
+<br>
+# Limpiar logs antiguos<br>
+# (se hace automáticamente con logrotate)<br>
+                    </div>
+
+                    <h4>Optimizar almacenamiento:</h4>
+                    <div class="code-block">
+# Recrear colección optimizada<br>
+python recreate_qdrant_collection.py<br>
+<br>
+# Limpiar documentos duplicados<br>
+python setup_mongodb.py<br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="comandos">
+            <div class="section-header">💻 COMANDOS DE LÍNEA</div>
+            <div class="section-content">
+                <div class="subsection">
+                    <h3>Procesamiento por Lotes</h3>
+                    <div class="code-block">
+# Procesar toda la colección<br>
+python procesar_coleccion.py --batch-size 50 --verbose<br>
+<br>
+# Procesar máximo 1000 documentos<br>
+python procesar_coleccion.py --max-docs 1000 --batch-size 25<br>
+<br>
+# Procesamiento silencioso<br>
+python procesar_coleccion.py --batch-size 100<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Búsqueda Directa</h3>
+                    <div class="code-block">
+# Búsqueda semántica desde Python<br>
+from src.busqueda_semantica import BuscadorSemantico<br>
+from src.database import DatabaseManager<br>
+<br>
+db = DatabaseManager()<br>
+buscador = BuscadorSemantico(db)<br>
+resultados = buscador.buscar_semanticamente('perros jugando en el parque')<br>
+<br>
+for r in resultados:<br>
+    print(f'{r.documento.nombre}: {r.similitud:.3f}')<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Utilidades del Sistema</h3>
+                    <div class="code-block">
+# Ver estado del sistema<br>
+python status.py<br>
+<br>
+# Verificar integridad de datos<br>
+python check_imports.py<br>
+<br>
+# Recrear colección de Qdrant<br>
+python recreate_qdrant_collection.py<br>
+<br>
+# Backup de MongoDB<br>
+python test_backup_restore_mongodb.py<br>
+<br>
+# Backup de Qdrant<br>
+python test_backup_restore.py<br>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3>Configuración desde Línea de Comandos</h3>
+                    <div class="code-block">
+# Configurar variables de entorno<br>
+export MONGODB_URI="mongodb://localhost:27017/"<br>
+export OLLAMA_BASE_URL="http://localhost:11434"<br>
+<br>
+# Ejecutar con configuración específica<br>
+MONGODB_DATABASE=album python main.py<br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="capturas">
+            <div class="section-header">📸 CAPTURAS DE PANTALLA</div>
+            <div class="section-content">
+                <div class="image-container">
+                    <img src="imagenes/bs_1.png" alt="Interfaz principal de Búsqueda Semántica V2">
+                    <div class="image-caption">Interfaz principal con pestañas de navegación y controles de búsqueda</div>
+                </div>
+
+                <div class="image-container">
+                    <img src="imagenes/bs_2.png" alt="Pestaña de procesamiento de colección">
+                    <div class="image-caption">Procesamiento por lotes con estadísticas en tiempo real y control de progreso</div>
+                </div>
+
+                <div class="image-container">
+                    <img src="imagenes/bs_3.png" alt="Pestaña de búsqueda semántica">
+                    <div class="image-caption">Interfaz de búsqueda con filtros avanzados y resultados ordenados por relevancia</div>
+                </div>
+
+                <div class="image-container">
+                    <img src="imagenes/bs_4.png" alt="Configuración del sistema">
+                    <div class="image-caption">Configuración de parámetros de conexión y modelos de IA</div>
+                </div>
+
+                <div class="image-container">
+                    <img src="imagenes/bs_5.png" alt="Monitoreo y logs">
+                    <div class="image-caption">Seguimiento de procesos, logs del sistema y estadísticas detalladas</div>
+                </div>
+
+                <div class="image-container">
+                    <img src="imagenes/bs_6.png" alt="Resultados de búsqueda">
+                    <div class="image-caption">Visualización de resultados con similitud, metadatos y previsualización de imágenes</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <h3>🎯 CONCLUSIÓN</h3>
+        <p><strong>Búsqueda Semántica V2</strong> representa un avance significativo en la tecnología de búsqueda inteligente, combinando múltiples disciplinas de la IA para proporcionar una experiencia de usuario excepcional.</p>
+
+        <h4>Capacidades Clave:</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 20px 0;">
+            <div>✅ Búsqueda semántica avanzada con IA</div>
+            <div>✅ Procesamiento automático de imágenes</div>
+            <div>✅ Interfaz gráfica moderna e intuitiva</div>
+            <div>✅ Escalabilidad para grandes volúmenes de datos</div>
+            <div>✅ Backup y recuperación integrados</div>
+            <div>✅ Monitoreo y mantenimiento automatizado</div>
+        </div>
+
+        <h4>Beneficios:</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 20px 0;">
+            <div>🚀 <strong>Eficiencia:</strong> Búsquedas hasta 100x más rápidas con Qdrant</div>
+            <div>🧠 <strong>Inteligencia:</strong> Comprensión contextual del lenguaje natural</div>
+            <div>🔍 <strong>Precisión:</strong> Resultados altamente relevantes y contextuales</div>
+            <div>📈 <strong>Escalabilidad:</strong> Crece según las necesidades del usuario</div>
+            <div>🛡️ <strong>Confiabilidad:</strong> Sistema robusto con recuperación de fallos</div>
+        </div>
+
+        <p><strong>¡Transforme sus imágenes en conocimiento searchable con IA! 🧠📸</strong></p>
+        <p><em>Para soporte técnico o reportar problemas, visite nuestra página de GitHub.</em></p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,85 @@
+# ==========================================
+# BÚSQUEDA SEMÁNTICA V2 - REQUIREMENTS
+# ==========================================
+# Fecha de actualización: 2025-09-26
+# Proyecto de búsqueda semántica con IA
+# ==========================================
+
+# ==========================================
+# DEPENDENCIAS PRINCIPALES
+# ==========================================
+# Framework de procesamiento de lenguaje
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-ollama>=0.0.1
+
+# ==========================================
+# BASES DE DATOS
+# ==========================================
+# MongoDB - Base de datos principal
+pymongo>=4.6.0
+bson>=0.5.10
+
+# Qdrant - Base de datos vectorial
+qdrant-client>=1.7.0
+
+# ==========================================
+# INTERFAZ GRÁFICA
+# ==========================================
+# Framework Qt para Python
+PySide6>=6.6.0
+
+# ==========================================
+# UTILIDADES
+# ==========================================
+# Variables de entorno
+python-dotenv>=1.0.0
+
+# Solicitudes HTTP
+requests>=2.31.0
+
+# Validación de datos
+pydantic>=2.5.0
+
+# ==========================================
+# PROCESAMIENTO DE LENGUAJE E IA
+# ==========================================
+# Embeddings y transformers
+sentence-transformers>=2.2.0
+transformers>=4.21.0
+torch>=2.0.0
+numpy>=1.24.0
+
+# ==========================================
+# PROCESAMIENTO DE IMÁGENES
+# ==========================================
+# Procesamiento de imágenes
+Pillow>=9.0.0
+
+# Detección de objetos
+timm>=0.9.0
+
+# Procesamiento EXIF
+piexif>=1.3.1
+
+# ==========================================
+# HERRAMIENTAS DE DESARROLLO
+# ==========================================
+# Barras de progreso
+tqdm>=4.64.0
+
+# ==========================================
+# NOTAS DE INSTALACIÓN
+# ==========================================
+# Para instalar todas las dependencias:
+# pip install -r requirements.txt
+#
+# Para instalar en modo desarrollo:
+# pip install -e .
+#
+# Requisitos del sistema:
+# - Python 3.8+
+# - MongoDB 4.4+
+# - Qdrant 1.0+
+# - Ollama con modelos instalados
+# ==========================================
